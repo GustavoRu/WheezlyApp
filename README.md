@@ -1,4 +1,4 @@
-# Take Home API Scaffolding
+# WheezlyApp
 
 Este proyecto es un scaffolding para APIs REST en .NET 8 con Entity Framework Core y arquitectura limpia.
 
