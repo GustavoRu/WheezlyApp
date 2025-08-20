@@ -1,0 +1,6 @@
+@WheezlyApp_HostAddress = http://localhost:5091
+
+GET {{WheezlyApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
