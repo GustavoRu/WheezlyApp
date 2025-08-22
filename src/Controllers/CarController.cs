@@ -26,30 +26,30 @@ public class CarController : ControllerBase
     public async Task<IActionResult> GetCarInfoWithEF(int id)
     {
         var cars = await _context.Cars
-    .Include(c => c.Make)
-    .Include(c => c.Model)
-    .Include(c => c.SubModel)
-    .Include(c => c.ZipCode)
-    .Include(c => c.Quotes.Where(q => q.IsCurrentQuote))
-        .ThenInclude(q => q.Buyer)
-    .Include(c => c.StatusHistories
-        .OrderByDescending(sh => sh.CreatedDate)
-        .Take(1))
-        .ThenInclude(sh => sh.Status)
-    .Where(c => c.IsActive && c.Id == id)
-    .Select(c => new
-    {
-        Year = c.Year,
-        Make = c.Make.Name,
-        Model = c.Model.Name,
-        SubModel = c.SubModel.Name,
-        ZipCode = c.ZipCode.ZipCode1,
-        BuyerName = c.Quotes.FirstOrDefault(q => q.IsCurrentQuote).Buyer.Name,
-        CurrentQuote = c.Quotes.FirstOrDefault(q => q.IsCurrentQuote).CurrentAmount,
-        CurrentStatus = c.StatusHistories.OrderByDescending(sh => sh.CreatedDate).First().Status.Name,
-        StatusDate = c.StatusHistories.OrderByDescending(sh => sh.CreatedDate).First().StatusDate
-    })
-    .ToListAsync();
+        .Include(c => c.Make)
+        .Include(c => c.Model)
+        .Include(c => c.SubModel)
+        .Include(c => c.ZipCode)
+        .Include(c => c.Quotes.Where(q => q.IsCurrentQuote))
+            .ThenInclude(q => q.Buyer)
+        .Include(c => c.StatusHistories
+            .OrderByDescending(sh => sh.CreatedDate)
+            .Take(1))
+            .ThenInclude(sh => sh.Status)
+        .Where(c => c.IsActive && c.Id == id)
+        .Select(c => new
+        {
+            Year = c.Year,
+            Make = c.Make.Name,
+            Model = c.Model.Name,
+            SubModel = c.SubModel.Name,
+            ZipCode = c.ZipCode.ZipCode1,
+            BuyerName = c.Quotes.FirstOrDefault(q => q.IsCurrentQuote).Buyer.Name,
+            CurrentQuote = c.Quotes.FirstOrDefault(q => q.IsCurrentQuote).CurrentAmount,
+            CurrentStatus = c.StatusHistories.OrderByDescending(sh => sh.CreatedDate).First().Status.Name,
+            StatusDate = c.StatusHistories.OrderByDescending(sh => sh.CreatedDate).First().StatusDate
+        })
+        .ToListAsync();
         return Ok(cars);
     }
 
