@@ -18,7 +18,7 @@ public class TestFilesController : ControllerBase
     {
         try
         {
-            // Construir ruta absoluta
+            // ruta absoluta
             var basePath = Directory.GetCurrentDirectory();
             var fullPath = Path.GetFullPath(Path.Combine(basePath, "..", path));
             
