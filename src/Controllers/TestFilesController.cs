@@ -6,24 +6,36 @@ namespace WheezlyApp.Controllers;
 [Route("api/[controller]")]
 public class TestFilesController : ControllerBase
 {
+    private readonly IWebHostEnvironment _environment;
+
+    public TestFilesController(IWebHostEnvironment environment)
+    {
+        _environment = environment;
+    }
+
     [HttpPost("ProcessFiles")]
     public IActionResult ProcessFiles([FromQuery] string path = "tests/TestFiles")
     {
         try
         {
-            var script = new ScriptFolders();
+            // Construir ruta absoluta
+            var basePath = Directory.GetCurrentDirectory();
+            var fullPath = Path.GetFullPath(Path.Combine(basePath, "..", path));
             
-            if (!Directory.Exists(path))
+            Console.WriteLine($"Trying path: {fullPath}");
+            
+            if (!Directory.Exists(fullPath))
             {
-                return BadRequest($"not found: {path}");
+                return BadRequest($"directory not found: {fullPath}");
             }
             
-            script.ProcessFiles(path);
-            return Ok($"processed successfully in: {path}");
+            var script = new ScriptFolders();
+            script.ProcessFiles(fullPath);
+            return Ok($"fFiles processed succesfully in: {fullPath}");
         }
         catch (Exception ex)
         {
-            return BadRequest($"Error: {ex.Message}");
+            return BadRequest($"error: {ex.Message}");
         }
     }
 }
