@@ -22,11 +22,11 @@ public class ScriptFolders
                             ? m.Value
                             : m.Value.Replace(m.Groups[1].Value, m.Groups[1].Value + "Async"));
 
-                    // b) Renombrar Vm/Vms/Dto/Dtos
-                    content = Regex.Replace(content, @"\bVm\b", "VM");
-                    content = Regex.Replace(content, @"\bVms\b", "VMs");
-                    content = Regex.Replace(content, @"\bDto\b", "DTO");
-                    content = Regex.Replace(content, @"\bDtos\b", "DTOs");
+                    // b) Renombrar Vm/Vms/Dto/Dtos en nombres de métodos y clases
+                    content = Regex.Replace(content, @"(\w+)Vm\b", "$1VM");
+                    content = Regex.Replace(content, @"(\w+)Vms\b", "$1VMs");
+                    content = Regex.Replace(content, @"(\w+)Dto\b", "$1DTO");
+                    content = Regex.Replace(content, @"(\w+)Dtos\b", "$1DTOs");
 
                     // c) Insertar línea en blanco entre métodos
                     content = Regex.Replace(content,
