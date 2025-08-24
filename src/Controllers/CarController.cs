@@ -23,7 +23,7 @@ public class CarController : ControllerBase
 
 
     [HttpGet("GetCarInfoWithEF")]
-    public async Task<IActionResult> GetCarInfoWithEF(int id)
+    public async Task<IActionResult> GetCarInfoWithEF(int id = 3) // Por defecto vw gol que deberia traer fechaa
     {
         var cars = await _context.Cars
         .Include(c => c.Make)
