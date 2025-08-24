@@ -8,7 +8,7 @@ public class ScriptFoldersTests
 
     public ScriptFoldersTests()
     {
-        // Crear directorio temporal para tests
+        // creamos directorio temporal para tests
         _testFilesPath = Path.Combine(Path.GetTempPath(), "ScriptFoldersTests");
         Directory.CreateDirectory(_testFilesPath);
     }
@@ -83,7 +83,7 @@ public class ScriptFoldersTests
 
     public void Dispose()
     {
-        // Cleanup: eliminar archivos temporales
+        // eliminamos archivos temporales
         if (Directory.Exists(_testFilesPath))
         {
             Directory.Delete(_testFilesPath, true);
